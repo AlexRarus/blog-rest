@@ -95,8 +95,8 @@ router.post('/api/posts/', async (req, res) => {
   const { body, user } = req;
 
   let data = {
-    title: JSON.parse(body.title), // maxLength
-    content: JSON.parse(body.content), // maxLength
+    title: body.title, // maxLength
+    content: body.content, // maxLength
     authorId: user.id, // isRequired
   };
 
@@ -124,32 +124,32 @@ router.post('/api/posts/', async (req, res) => {
   }
 });
 
-router.put('/api/posts/update/', async (req, res) => {
-  const { files, body, user } = req;
+router.put('/api/posts/:id', async (req, res) => {
+  const { params: { id }, body, user } = req;
 
-  const admin = user.role === 'admin';
-  const userIdString = user.id.toString();
-  const authorIdString = JSON.parse(body.authorId);
+  try {
+    const targetPost = await Post.findOne({ id }, { strict: false });
 
-  // нельзя изменять чужие посты
-  if (userIdString !== authorIdString || !admin) {
-    res.status(403).json(null);
+    const admin = user.role === 'admin';
+    // нельзя изменять чужие посты
+    if (user.id !== targetPost.authorId || !admin) {
+      return res.status(403).json(null);
+    }
+  } catch (error) {
+    return res.status(500).json(null);
   }
 
-  const title = JSON.parse(body.title).toString();
-  const content = JSON.parse(body.content).toString();
-  const authorId = JSON.parse(body.authorId);
+  const title = body.title;
+  const content = body.content;
 
   let data = {
     title, // maxLength
     content, // maxLength
-    authorId, // isRequired
   };
 
   const constraints = {
     title: { maxLength: 200 },
     content: { maxLength: 1000 },
-    authorId: { isRequired: true },
   };
 
   try {
@@ -161,7 +161,7 @@ router.put('/api/posts/update/', async (req, res) => {
   data = removeEmptyFields(data);
 
   try {
-    const post = await Post.findOneAndUpdate({ id: JSON.parse(body.id) }, data, { strict: false });
+    const post = await Post.findOneAndUpdate({ id }, data, { strict: false });
     res.send(await updatePost(post));
   } catch (error) {
     console.log(error); // eslint-disable-line

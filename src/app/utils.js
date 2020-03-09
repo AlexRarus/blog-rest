@@ -30,6 +30,7 @@ function passportJSConfigure(passport) {
 
   passport.use(new LocalStrategy({ usernameField: 'login', passwordField: 'password' },
     (login, password, done) => {
+      console.log('login: ', login);
       if (login === undefined || login === null || login === '') {
         return done('login is empty');
       }

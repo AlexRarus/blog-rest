@@ -15,15 +15,11 @@ const PostModelSchema = new Schema({
     type: String
   },
   content: String,
-  image: Object,
-  anonymous: Boolean,
   authorId: Schema.ObjectId,
-  allowComments: Boolean,
   date: {
     type: Date,
     default: Date.now
   },
-  accepted: Boolean,
   views: {
     type: Array,
     default: []
