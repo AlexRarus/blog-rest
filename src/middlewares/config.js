@@ -1,8 +1,6 @@
 function allowCORS(req, res, next) { // todo настроить допустимые ресурсы
   const baseUrl = `${req.protocol}://${req.hostname}${req.hostname === 'localhost' ? ':4444' : ''}`;
 
-  console.log('baseUrl: ', baseUrl);
-
   res.setHeader('Access-Control-Allow-Origin', baseUrl);
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, content-type, Accept');
   res.setHeader('Access-Control-Allow-Credentials', true);
