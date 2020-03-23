@@ -17,19 +17,19 @@ body(тело запроса):
 	<summary>Успешный ответ:</summary>
 
 ```
-	status = 200;
-	body = {
-				id: string,
-				role: string,
-				admin: boolean,
-				login: string,
-				firstName: string,
-				lastName: string,
-				patronymic: string,
-				avatar: string,
-				registrationDate: string,
-				email: string
-			}
+status = 200;
+body = {
+	id: string,
+	role: string,
+	admin: boolean,
+	login: string,
+	firstName: string,
+	lastName: string,
+	patronymic: string,
+	avatar: string,
+	registrationDate: string,
+	email: string
+}
 ```
 </details>
 
