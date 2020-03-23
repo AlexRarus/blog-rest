@@ -5,7 +5,7 @@ url: `/api/users/signin`
 
 method `POST`
 
-data(тело запроса):
+body(тело запроса):
 ```
 {
 	login: string,
@@ -15,7 +15,8 @@ data(тело запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
-	```javascript
+	
+	```
 		status = 200;
 		body = {
                		id: string,
@@ -34,7 +35,8 @@ data(тело запроса):
 
 <details>
 	<summary>Если неправильный login или password:</summary>
-	```javascript
+
+	```
 		status = 401;
 		body = 'Unauthorized'
 	```
@@ -42,7 +44,8 @@ data(тело запроса):
 
 <details>
 	<summary>Если отсутствует login или password:</summary>
-	```javascript
+
+	```
 		status = 400;
 		body = 'Bad request'
 	```
@@ -50,6 +53,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/signin';
         const data = { login: 'example', password: 'example' };
@@ -71,6 +75,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/signin';
         const data = { login: 'example', password: 'example' };
@@ -93,6 +98,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 			id: "5e62399ae95efa2005d521c9"
@@ -114,7 +120,7 @@ url: `/api/users/signup/`
 
 method: `POST`
 
-data(тело запроса):
+body(тело запроса):
 ```
 (поля помеченные знаком "?" являются НЕ обязательными)
 {
@@ -128,6 +134,7 @@ data(тело запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200;
 		body = {
@@ -147,6 +154,7 @@ data(тело запроса):
 
 <details>
 	<summary>Не успешный ответ (если мы не передали ни одно из полей):</summary>
+
 	```javascript
 		status = 400;
 		body = {
@@ -160,6 +168,7 @@ data(тело запроса):
 
 <details>
 	<summary>Не успешный ответ (если логин уже занят):</summary>
+
 	```javascript
 		status = 400;
 		body = {
@@ -170,6 +179,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/signup';
         const data = {
@@ -196,6 +206,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/signup';
         const data = {
@@ -223,6 +234,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 			id: "5e62399ae95efa2005d521c9"
@@ -246,6 +258,7 @@ method: `GET`
 
 <details>
 	<summary>Успешный ответ если пользователь авторизован(есть кука от бэка):</summary>
+
 	```javascript
 		status = 200;
 		body = {
@@ -265,6 +278,7 @@ method: `GET`
 
 <details>
 	<summary>Не успешный ответ (нет куки):</summary>
+
 	```javascript
 		status = 200;
 		body = null
@@ -273,6 +287,7 @@ method: `GET`
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/auth';
         
@@ -293,6 +308,7 @@ method: `GET`
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/auth';
 
@@ -313,6 +329,7 @@ method: `GET`
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 			id: "5e62399ae95efa2005d521c9"
@@ -336,6 +353,7 @@ method: `GET`
 
 <details>
 	<summary>Успешный ответ (пользователь авторизован):</summary>
+
 	```javascript
 		status = 200;
 		body = {
@@ -346,6 +364,7 @@ method: `GET`
 
 <details>
 	<summary>Не успешный ответ (пользователь НЕ авторизован):</summary>
+
 	```javascript
 		status = 403;
 		body = null
@@ -354,6 +373,7 @@ method: `GET`
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/signout';
         
@@ -373,6 +393,7 @@ method: `GET`
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/signout';
 
@@ -393,6 +414,7 @@ method: `GET`
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{ success: true }
 	```
@@ -405,6 +427,7 @@ method: `GET`
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = true | false // авторизован или не авторизован
@@ -413,6 +436,7 @@ method: `GET`
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/check-auth';
         
@@ -432,6 +456,7 @@ method: `GET`
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/check-auth';
 
@@ -452,6 +477,7 @@ method: `GET`
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		true
 	```
@@ -479,6 +505,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = [
@@ -501,6 +528,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users';
         
@@ -520,6 +548,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users';
 
@@ -547,6 +576,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		[
 			{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},
@@ -570,6 +600,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = {
@@ -590,6 +621,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/users/5e7376a32c752801c3ea8877';
         
@@ -609,6 +641,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/5e7376a32c752801c3ea8877';
 
@@ -629,6 +662,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 			"id":"5e7376a32c752801c3ea8877",
@@ -665,6 +699,7 @@ data(тело запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = {
@@ -689,6 +724,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/users/5e7376a32c752801c3ea8877';
         const data = {
@@ -715,6 +751,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/5e7376a32c752801c3ea8877';
         const data = {
@@ -742,6 +779,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 			"id":"5e7376a32c752801c3ea8877",
@@ -776,6 +814,7 @@ data(тело запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = {
@@ -787,6 +826,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/users/check-exists';
         
@@ -806,6 +846,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/check-exists';
 
@@ -826,6 +867,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 			exists: true
@@ -849,6 +891,7 @@ data(тело запроса):
 
 <details>
 	<summary>Успешный ответ (пользователь авторизован):</summary>
+
 	```javascript
 		status = 200
 		body = { success: true }
@@ -857,6 +900,7 @@ data(тело запроса):
 
 <details>
 	<summary>Не успешный ответ (пользователь не авторизован):</summary>
+
 	```javascript
 		status = 403
 		body = 'Unauthorized'
@@ -865,6 +909,7 @@ data(тело запроса):
 
 <details>
 	<summary>Не успешный ответ (currentPassword !== password):</summary>
+
 	```javascript
 		status = 200
 		body = { error: true }
@@ -873,6 +918,7 @@ data(тело запроса):
 
 <details>
 	<summary>Не успешный ответ (не переданы параметры):</summary>
+
 	```javascript
 		status = 400
 		body = {
@@ -891,6 +937,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/users/change/password';
 		const data = {
@@ -915,6 +962,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/users/change/password';
 		const data = {
@@ -940,6 +988,7 @@ data(тело запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{ success: true }
 	```
@@ -961,7 +1010,8 @@ query-string (GET параметры запроса):
 ```
 
 <details>
-	<summary>Успешный ответ:</summary>
+	<summary>Успешный ответ:</summary>\
+
 	```javascript
 		status = 200
 		body = [
@@ -986,6 +1036,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/posts';
         
@@ -1005,6 +1056,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/posts';
 
@@ -1030,6 +1082,7 @@ query-string (GET параметры запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		[
 			{"views":["#guest","#guest","#guest","#guest","#guest","#guest","#guest","#guest"],"viewsCount":8,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778ccd2c752801c3ea8888","title":"qwertyuiopoiuytrew","content":"rtyui\nvg\ncgvh\nvgh\nv\nhv\nh\nv","authorId":"5e7376a32c752801c3ea8877","id":"5e778ccd2c752801c3ea8889","date":"2020-03-22T16:05:33.017Z","postNumber":11,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
@@ -1056,6 +1109,7 @@ body(тело запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = {
@@ -1079,6 +1133,7 @@ body(тело запроса):
 
 <details>
 	<summary>Не успешный ответ (пользователь не авторизован):</summary>
+
 	```javascript
 		status = 403
 		body = null	
@@ -1087,6 +1142,7 @@ body(тело запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/posts';
 		const data = {
@@ -1111,6 +1167,7 @@ body(тело запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/posts';
 		const data = {
@@ -1136,6 +1193,7 @@ body(тело запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 		"views":[],
@@ -1181,6 +1239,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Успешный ответ:</summary>
+
 	```javascript
 		status = 200
 		body = {
@@ -1205,6 +1264,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Пример запроса fetch</summary>
+
 	```javascript
 		const url = 'http://school-blog.ru/api/posts/5e778ccd2c752801c3ea8888';
 
@@ -1225,6 +1285,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Пример запроса axios</summary>
+
 	```javascript
 		const url = 'https://school-blog.ru/api/posts/5e778ccd2c752801c3ea8888';
 
@@ -1245,6 +1306,7 @@ params (Параметры в урле запроса):
 
 <details>
 	<summary>Пример ответа</summary>
+
 	```javascript
 		{
 		"views":[],
