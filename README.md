@@ -1,4 +1,4 @@
-# blog-res-api
+# blog-rest-api
 
 ### Авторизация
 url: `/api/users/signin`
