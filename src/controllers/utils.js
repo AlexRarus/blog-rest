@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import fs from 'fs';
 import Avatars from '@dicebear/avatars';
 import SpriteCollection from '@dicebear/avatars-male-sprites';

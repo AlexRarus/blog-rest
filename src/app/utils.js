@@ -198,7 +198,8 @@ async function validateData(data, constraints) {
     try {
       // isRequired
       if (constraint.isRequired) {
-        const valueExists = value !== undefined && value !== null && value !== '';
+        const valueData = value !== undefined && value !== null;
+        const valueExists = valueData && value.toString().trim();
 
         if (!valueExists) {
           error.isRequired = constraint.isRequired;

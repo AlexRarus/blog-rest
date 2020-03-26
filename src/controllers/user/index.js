@@ -17,7 +17,7 @@ momentDurationFormatSetup(moment);
 router.post('/api/users/signup/', async (req, res) => {
   const body = {
     login: req.body.login,
-    email: req.body.login,
+    email: req.body.email,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: req.body.password,

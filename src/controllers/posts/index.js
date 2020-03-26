@@ -7,7 +7,7 @@ import { validate } from 'src/app/utils.js';
 const router = express.Router();
 
 router.get('/api/posts/', async (req, res) => {
-  const { query = {} } = req;
+  const { query = {}, user } = req;
   const { authorId, offset = 0, offsetStep = 5, search, sort } = query;
 
   try {
@@ -38,7 +38,7 @@ router.get('/api/posts/', async (req, res) => {
       .skip(parseInt(offset, 10))
       .limit(parseInt(offsetStep, 10));
 
-    res.send(await updatePosts(posts));
+    res.send(await updatePosts(posts, user));
   } catch (error) {
     console.log(error); // eslint-disable-line
     res.status(500).json(null);
@@ -64,7 +64,7 @@ router.get('/api/posts/favourite/', async (req, res) => {
         .limit(parseInt(offsetStep, 10))
       : [];
 
-    res.send(await updatePosts(posts));
+    res.send(await updatePosts(posts, user));
   } catch (error) {
     console.log(error); // eslint-disable-line
     res.status(500).json(null);
@@ -78,13 +78,11 @@ router.get('/api/posts/:id', async (req, res) => {
 
   try {
     const prevPost = await Post.findOne(filter);
-    const { views, viewsCount } = prevPost.toObject();
-    const viewer = user ? user.id : '#guest';
-    views.push(viewer);
+    const { viewsCount } = prevPost.toObject();
 
-    const post = await Post.findOneAndUpdate({ id }, { views, viewsCount: viewsCount + 1 }, opts);
+    const post = await Post.findOneAndUpdate({ id }, { viewsCount: viewsCount + 1 }, opts);
 
-    res.send(await updatePost(post));
+    res.send(await updatePost(post, user));
   } catch (error) {
     // пост не найден
     res.status(404).json(null);
@@ -117,7 +115,7 @@ router.post('/api/posts/', async (req, res) => {
   try {
     const post = new Post(data);
     const createdPost = await Post.create(post);
-    res.send(await updatePost(createdPost));
+    res.send(await updatePost(createdPost, user));
   } catch (error) {
     console.log(error); // eslint-disable-line
     res.status(500).json(null);
@@ -162,7 +160,7 @@ router.put('/api/posts/:id', async (req, res) => {
 
   try {
     const post = await Post.findOneAndUpdate({ id }, data, { strict: false });
-    res.send(await updatePost(post));
+    res.send(await updatePost(post, user));
   } catch (error) {
     console.log(error); // eslint-disable-line
     res.status(500).json(null);
@@ -208,7 +206,7 @@ router.put('/api/posts/like/:id', async (req, res) => {
     await Post.update({ id }, { likesCount, rating }, { strict: false });
     const updatedPost = await Post.findOne({ id });
 
-    res.send(await updatePost(updatedPost));
+    res.send(await updatePost(updatedPost, user));
   } catch (error) {
     console.log(error); // eslint-disable-line
     res.status(500).json(null);
@@ -239,7 +237,7 @@ router.put('/api/posts/dislike/:id', async (req, res) => {
     await Post.update({ id }, { dislikesCount, rating }, { strict: false });
     const updatedPost = await Post.findOne({ id });
 
-    res.send(await updatePost(updatedPost));
+    res.send(await updatePost(updatedPost, user));
   } catch (error) {
     console.log(error); // eslint-disable-line
     res.status(500).json(null);

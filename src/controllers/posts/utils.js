@@ -1,16 +1,16 @@
 import { Post, User, Like, Dislike } from 'src/db/models';
 import ClientPost from './ClientPost';
 
-async function updatePost(post) {
+async function updatePost(post, user) {
   const author = await User.findOne({ id: post.authorId });
-  const likes = await Like.find({ entityId: post.id });
-  const dislikes = await Dislike.find({ entityId: post.id });
+  const likes = await Like.find({ entityId: post.id, authorId: user && user.id });
+  const dislikes = await Dislike.find({ entityId: post.id, authorId: user && user.id });
 
   return new ClientPost(post, author, likes, dislikes);
 }
 
-async function updatePosts(posts) {
-  return await Promise.all(posts.map(updatePost));
+async function updatePosts(posts, user) {
+  return await Promise.all(posts.map(post => updatePost(post, user)));
 }
 
 async function removePost(post) {

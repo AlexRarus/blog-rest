@@ -20,10 +20,6 @@ const PostModelSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  views: {
-    type: Array,
-    default: []
-  },
   viewsCount: { // поле нужно для сортировки
     type: Number,
     default: 0
