@@ -3,10 +3,10 @@ import ClientPost from './ClientPost';
 
 async function updatePost(post, user) {
   const author = await User.findOne({ id: post.authorId });
-  const likes = await Like.find({ entityId: post.id, authorId: user && user.id });
-  const dislikes = await Dislike.find({ entityId: post.id, authorId: user && user.id });
+  const relatedLikes = user ? await Like.find({ entityId: post.id, authorId: user.id }) : [];
+  const relatedDislikes = user ? await Dislike.find({ entityId: post.id, authorId: user.id }) : [];
 
-  return new ClientPost(post, author, likes, dislikes);
+  return new ClientPost(post, author, relatedLikes, relatedDislikes);
 }
 
 async function updatePosts(posts, user) {
