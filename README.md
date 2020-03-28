@@ -517,7 +517,6 @@ query-string (GET параметры запроса):
 			lastName: string,
 			patronymic: string,
 			avatar: string,
-			patronymic: string,
 			registrationDate: string,
 			role: string,
 			admin: boolean
@@ -611,7 +610,6 @@ params (Параметры в урле запроса):
 		lastName: string,
 		patronymic: string,
 		avatar: string,
-		patronymic: string,
 		registrationDate: string,
 		role: string,
 		admin: boolean
@@ -710,7 +708,6 @@ data(тело запроса):
 		lastName: string,
 		patronymic: string,
 		avatar: string,
-		patronymic: string,
 		registrationDate: string,
 		role: string,
 		admin: boolean,
@@ -950,7 +947,7 @@ data(тело запроса):
 		method: 'PUT',
 		body: data
 	  });
-	  const status = response.status // может быть 200 | 403 | 400
+	  const status = response.status; // может быть 200 | 403 | 400
 
 	  const json = await response.json();
 	  console.log('Успех:', JSON.stringify(json));
@@ -976,7 +973,7 @@ data(тело запроса):
 		method: 'PUT',
 		data
 	  });
-	  const status = response.status // может быть 200
+	  const status = response.status; // может быть 200
 	  const data = response.data; // тело ответа
 
 	  console.log('Успех:', data);
@@ -1021,10 +1018,9 @@ query-string (GET параметры запроса):
 			content: string,
 			authorId: string,
 			date: string,
-			views: string[],
 			author: Object,
-			likes: string[],
-			dislikes: string[],
+			relatedLikes: string[], // в массиве приходит id пользователя, если он поставил лайк
+			relatedDislikes: string[], // в массиве приходит id пользователя, если он поставил дизлайк
 			viewsCount: number,
 			likesCount: number,
 			dislikesCount: number,
@@ -1044,7 +1040,7 @@ query-string (GET параметры запроса):
 	  const response = await fetch(url, {
 		method: 'GET'
 	  });
-	  const status = response.status // может быть 200
+	  const status = response.status; // может быть 200
 
 	  const json = await response.json();
 	  console.log('Успех:', JSON.stringify(json));
@@ -1070,7 +1066,7 @@ query-string (GET параметры запроса):
 			offsetStep: 30
 		}
 	  });
-	  const status = response.status // может быть 200
+	  const status = response.status; // может быть 200
 	  const data = response.data; // тело ответа
 
 	  console.log('Успех:', data);
@@ -1085,11 +1081,11 @@ query-string (GET параметры запроса):
 
 ```javascript
 	[
-		{"views":["#guest","#guest","#guest","#guest","#guest","#guest","#guest","#guest"],"viewsCount":8,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778ccd2c752801c3ea8888","title":"qwertyuiopoiuytrew","content":"rtyui\nvg\ncgvh\nvgh\nv\nhv\nh\nv","authorId":"5e7376a32c752801c3ea8877","id":"5e778ccd2c752801c3ea8889","date":"2020-03-22T16:05:33.017Z","postNumber":11,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
-		{"views":["#guest","#guest"],"viewsCount":2,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778bf12c752801c3ea8886","title":"asecd","content":"aesdcvaefsdvc eaf","authorId":"5e7376a32c752801c3ea8877","id":"5e778bf12c752801c3ea8887","date":"2020-03-22T16:01:53.650Z","postNumber":10,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
-		{"views":["#guest"],"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778b8c2c752801c3ea8884","title":"12","authorId":"5e7376a32c752801c3ea8877","id":"5e778b8c2c752801c3ea8885","date":"2020-03-22T16:00:12.871Z","postNumber":9,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
-		{"views":["#guest"],"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e71d2452c752801c3ea8870","title":"gfhn","content":"dgh","authorId":"5e62399ae95efa2005d521c9","id":"5e71d2452c752801c3ea8871","date":"2020-03-18T07:48:21.499Z","postNumber":8,"__v":0,"author":{"id":"5e62399ae95efa2005d521c9","role":"user","admin":false,"login":"1234","firstName":"123","lastName":"123","patronymic":"","avatar":"avatar-bcdd0fd116278a3bcc3e8b80e56106ee.svg","registrationDate":"2020-03-06T11:52:58.344Z","email":"1234"},"likes":[],"dislikes":[]},
-		{"views":["#guest"],"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e7115142c752801c3ea886e","title":"title","content":"qwertjhgfdsgh hjhgsfgdfh dgfhjmhf dthfjhgh","authorId":"5e62399ae95efa2005d521c9","id":"5e7115142c752801c3ea886f","date":"2020-03-17T18:21:08.316Z","postNumber":7,"__v":0,"author":{"id":"5e62399ae95efa2005d521c9","role":"user","admin":false,"login":"1234","firstName":"123","lastName":"123","patronymic":"","avatar":"avatar-bcdd0fd116278a3bcc3e8b80e56106ee.svg","registrationDate":"2020-03-06T11:52:58.344Z","email":"1234"},"likes":[],"dislikes":[]}
+		{"viewsCount":8,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778ccd2c752801c3ea8888","title":"qwertyuiopoiuytrew","content":"rtyui\nvg\ncgvh\nvgh\nv\nhv\nh\nv","authorId":"5e7376a32c752801c3ea8877","id":"5e778ccd2c752801c3ea8889","date":"2020-03-22T16:05:33.017Z","postNumber":11,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
+		{"viewsCount":2,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778bf12c752801c3ea8886","title":"asecd","content":"aesdcvaefsdvc eaf","authorId":"5e7376a32c752801c3ea8877","id":"5e778bf12c752801c3ea8887","date":"2020-03-22T16:01:53.650Z","postNumber":10,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
+		{"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778b8c2c752801c3ea8884","title":"12","authorId":"5e7376a32c752801c3ea8877","id":"5e778b8c2c752801c3ea8885","date":"2020-03-22T16:00:12.871Z","postNumber":9,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
+		{"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e71d2452c752801c3ea8870","title":"gfhn","content":"dgh","authorId":"5e62399ae95efa2005d521c9","id":"5e71d2452c752801c3ea8871","date":"2020-03-18T07:48:21.499Z","postNumber":8,"__v":0,"author":{"id":"5e62399ae95efa2005d521c9","role":"user","admin":false,"login":"1234","firstName":"123","lastName":"123","patronymic":"","avatar":"avatar-bcdd0fd116278a3bcc3e8b80e56106ee.svg","registrationDate":"2020-03-06T11:52:58.344Z","email":"1234"},"likes":[],"dislikes":[]},
+		{"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e7115142c752801c3ea886e","title":"title","content":"qwertjhgfdsgh hjhgsfgdfh dgfhjmhf dthfjhgh","authorId":"5e62399ae95efa2005d521c9","id":"5e7115142c752801c3ea886f","date":"2020-03-17T18:21:08.316Z","postNumber":7,"__v":0,"author":{"id":"5e62399ae95efa2005d521c9","role":"user","admin":false,"login":"1234","firstName":"123","lastName":"123","patronymic":"","avatar":"avatar-bcdd0fd116278a3bcc3e8b80e56106ee.svg","registrationDate":"2020-03-06T11:52:58.344Z","email":"1234"},"likes":[],"dislikes":[]}
 	]
 ```
 </details>
@@ -1118,10 +1114,9 @@ body(тело запроса):
 		content: string,
 		authorId: string,
 		date: string,
-		views: string[],
 		author: Object,
-		likes: string[],
-		dislikes: string[],
+		relatedLikes: string[], // в массиве приходит id пользователя, если он поставил лайк
+		relatedDislikes: string[], // в массиве приходит id пользователя, если он поставил дизлайк
 		viewsCount: number,
 		likesCount: number,
 		dislikesCount: number,
@@ -1196,7 +1191,6 @@ body(тело запроса):
 
 ```javascript
 	{
-	"views":[],
 	"viewsCount":0,
 	"likesCount":0,
 	"dislikesCount":0,
@@ -1221,8 +1215,8 @@ body(тело запроса):
 		"registrationDate":"2020-03-19T13:41:55.418Z",
 		"email":"12"
 		},
-	"likes":[],
-	"dislikes":[]
+	"relatedLikes":[],
+	"relatedDislikes":[]
 	},
 ```
 </details>
@@ -1248,10 +1242,9 @@ params (Параметры в урле запроса):
 		content: string,
 		authorId: string,
 		date: string,
-		views: string[],
 		author: Object,
-		likes: string[],
-		dislikes: string[],
+		relatedLikes: string[], // в массиве приходит id пользователя, если он поставил лайк
+		relatedDislikes: string[], // в массиве приходит id пользователя, если он поставил дизлайк
 		viewsCount: number,
 		likesCount: number,
 		dislikesCount: number,
@@ -1260,7 +1253,6 @@ params (Параметры в урле запроса):
 		
 ```
 </details>
-
 
 <details>
 <summary>Пример запроса fetch</summary>
@@ -1272,7 +1264,7 @@ params (Параметры в урле запроса):
 	  const response = await fetch(url, {
 		method: 'GET'
 	  });
-	  const status = response.status // может быть 200 | 403
+	  const status = response.status; // может быть 200 | 403
 
 	  const json = await response.json();
 	  console.log('Успех:', JSON.stringify(json));
@@ -1294,7 +1286,7 @@ params (Параметры в урле запроса):
 		url,
 		method: 'GET'
 	  });
-	  const status = response.status // может быть 200
+	  const status = response.status; // может быть 200
 	  const data = response.data; // тело ответа
 
 	  console.log('Успех:', data);
@@ -1309,7 +1301,6 @@ params (Параметры в урле запроса):
 
 ```javascript
 	{
-	"views":[],
 	"viewsCount":0,
 	"likesCount":0,
 	"dislikesCount":0,
@@ -1334,152 +1325,533 @@ params (Параметры в урле запроса):
 		"registrationDate":"2020-03-19T13:41:55.418Z",
 		"email":"12"
 		},
-	"likes":[],
-	"dislikes":[]
+	"relatedLikes":[],
+	"relatedDislikes":[]
 	},
 ```
 </details>
 
-
 ### Удаление поста
-path: `/api/posts/:id`
+url: `/api/posts/:id`
 
 method: `DELETE`
 
-params:
-`
+params (Параметры в урле запроса):
+```
 	id: string
-`
+```
 
-response:
-`
-	{
+<details>
+<summary>Успешный ответ:</summary>
+
+```javascript
+	status = 200
+	body = {
 		id: string,
 		removed: 'success'
 	}
-`
+		
+```
+</details>
+
+<details>
+<summary>Пример запроса fetch</summary>
+
+```javascript
+	const url = 'http://school-blog.ru/api/posts/5e778ccd2c752801c3ea8888';
+
+	try {
+	  const response = await fetch(url, {
+		method: 'DELETE'
+	  });
+	  const status = response.status; // может быть 200 | 403
+
+	  const json = await response.json();
+	  console.log('Успех:', JSON.stringify(json));
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+
+<details>
+<summary>Пример запроса axios</summary>
+
+```javascript
+	const url = 'https://school-blog.ru/api/posts/5e778ccd2c752801c3ea8888';
+
+	try {
+	  const response = await axios({
+		url,
+		method: 'DELETE'
+	  });
+	  const status = response.status; // может быть 200
+	  const data = response.data; // тело ответа
+
+	  console.log('Успех:', data);
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример ответа</summary>
+
+```javascript
+	{
+		id: '5e778ccd2c752801c3ea8888',
+		removed: 'success'
+	}
+```
+</details>
+
 
 ### Изменение поста
-path: `/api/posts/:id`
+url: `/api/posts/:id`
 
 method: `PUT`
 
-params:
-`
+params (Параметры в урле запроса):
+```
 	id: string
-	data: {
-		title: string,
-		content: string
-	}
-`
+```
+data (Тело запроса):
+```js
+{
+	title: string,
+	content: string
+}
+```
 
-response:
-`
-	{
-		id,
-		title,
-		content,
-		authorId,
-		date,
-		views,
-		author,
-		likes,
-		dislikes,
-		viewsCount,
-		likesCount,
-		dislikesCount,
-		rating
+<details>
+<summary>Успешный ответ:</summary>
+
+```javascript
+	status = 200
+	body = {
+		id: string,
+		title: string,
+		content: string,
+		authorId: string,
+		date: string,
+		author: Object,
+		relatedLikes: string[],  // в массиве приходит id пользователя, если он поставил лайк
+		relatedDislikes: string[],  // в массиве приходит id пользователя, если он поставил дизлайк
+		viewsCount: number,
+		likesCount: number,
+		dislikesCount: number,
+		rating: number
 	}
-`
+		
+```
+</details>
+
+<details>
+<summary>Пример запроса fetch</summary>
+
+```javascript
+	const url = 'http://school-blog.ru/api/posts/5e778ccd2c752801c3ea8888';
+	const data = {
+	  title: 'New titile',
+	  content: 'New content'
+	};
+
+	try {
+	  const response = await fetch(url, {
+		method: 'PUT',
+		body: data
+	  });
+	  const status = response.status; // может быть 200 | 403
+
+	  const json = await response.json();
+	  console.log('Успех:', JSON.stringify(json));
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример запроса axios</summary>
+
+```javascript
+	const url = 'https://school-blog.ru/api/posts/5e778ccd2c752801c3ea8888';
+	const data = {
+	  title: 'New titile',
+	  content: 'New content'
+	};
+
+	try {
+	  const response = await axios({
+		url,
+		method: 'PUT',
+		data
+	  });
+	  const status = response.status; // может быть 200
+	  const data = response.data; // тело ответа
+
+	  console.log('Успех:', data);
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример ответа</summary>
+
+```javascript
+	{
+		"viewsCount":0,
+		"likesCount":0,
+		"dislikesCount":0,
+		"rating":0,
+		"_id":"5e778ccd2c752801c3ea8888",
+		"title":"New titile",
+		"content":"New content",
+		"authorId":"5e7376a32c752801c3ea8877",
+		"id":"5e778ccd2c752801c3ea8888",
+		"date":"2020-03-22T16:05:33.017Z",
+		"postNumber":11,
+		"__v":0,
+		"author":{
+			"id":"5e7376a32c752801c3ea8877",
+			"role":"user",
+			"admin":false,
+			"login":"12",
+			"firstName":"12",
+			"lastName":"",
+			"patronymic":"",
+			"avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg",
+			"registrationDate":"2020-03-19T13:41:55.418Z",
+			"email":"12"
+			},
+		"relatedLikes":[],
+		"relatedDislikes":[]
+	}
+```
+</details>
+
 
 ### Добавление лайка посту
-path: `/api/posts/like/:id`
+url: `/api/posts/like/:id`
 
 method: `PUT`
 
-params:
-`
-	id: string;
-`
+params (Параметры в урле запроса):
+```
+	id: string
+```
 
-response:
-`
-	{
-		id,
-		title,
-		content,
-		authorId,
-		date,
-		views,
-		author,
-		likes,
-		dislikes,
-		viewsCount,
-		likesCount,
-		dislikesCount,
-		rating
+
+<details>
+<summary>Успешный ответ:</summary>
+
+```javascript
+	status = 200
+	body = {
+		id: string,
+		title: string,
+		content: string,
+		authorId: string,
+		date: string,
+		author: Object,
+		relatedLikes: string[],
+		relatedDislikes: string[],
+		viewsCount: number,
+		likesCount: number,
+		dislikesCount: number,
+		rating: number
 	}
-`
+		
+```
+</details>
+
+
+<details>
+<summary>Пример запроса fetch</summary>
+
+```javascript
+	const url = 'http://school-blog.ru/api/posts/like/5e778ccd2c752801c3ea8888';
+
+	try {
+	  const response = await fetch(url, {
+		method: 'PUT'
+	  });
+	  const status = response.status; // может быть 200
+
+	  const json = await response.json();
+	  console.log('Успех:', JSON.stringify(json));
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример запроса axios</summary>
+
+```javascript
+	const url = 'https://school-blog.ru/api/posts/like/5e778ccd2c752801c3ea8888';
+
+	try {
+	  const response = await axios({
+		url,
+		method: 'PUT'
+	  });
+	  const status = response.status; // может быть 200
+	  const data = response.data; // тело ответа
+
+	  console.log('Успех:', data);
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример ответа</summary>
+
+```javascript
+	{
+		"viewsCount":0,
+		"likesCount":0,
+		"dislikesCount":0,
+		"rating":0,
+		"_id":"5e778ccd2c752801c3ea8888",
+		"title":"New titile",
+		"content":"New content",
+		"authorId":"5e7376a32c752801c3ea8877",
+		"id":"5e778ccd2c752801c3ea8888",
+		"date":"2020-03-22T16:05:33.017Z",
+		"postNumber":11,
+		"__v":0,
+		"author":{
+			"id":"5e7376a32c752801c3ea8877",
+			"role":"user",
+			"admin":false,
+			"login":"12",
+			"firstName":"12",
+			"lastName":"",
+			"patronymic":"",
+			"avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg",
+			"registrationDate":"2020-03-19T13:41:55.418Z",
+			"email":"12"
+			},
+		"relatedLikes":[],
+		"relatedDislikes":[]
+	}
+```
+</details>
+
 
 ### Добавление дизлайка посту
-path: `/api/posts/dislike/:id`
+url: `/api/posts/dislike/:id`
 
 method: `PUT`
 
-params:
-`
-	id: string;
-`
+params (Параметры в урле запроса):
+```
+	id: string
+```
 
-response:
-`
-	{
-		id,
-		title,
-		content,
-		authorId,
-		date,
-		views,
-		author,
-		likes,
-		dislikes,
-		viewsCount,
-		likesCount,
-		dislikesCount,
-		rating
+
+<details>
+<summary>Успешный ответ:</summary>
+
+```javascript
+	status = 200
+	body = {
+		id: string,
+		title: string,
+		content: string,
+		authorId: string,
+		date: string,
+		author: Object,
+		relatedLikes: string[],  // в массиве приходит id пользователя, если он поставил лайк
+		relatedDislikes: string[],  // в массиве приходит id пользователя, если он поставил дизлайк
+		viewsCount: number,
+		likesCount: number,
+		dislikesCount: number,
+		rating: number
 	}
-`
+		
+```
+</details>
+
+
+<details>
+<summary>Пример запроса fetch</summary>
+
+```javascript
+	const url = 'http://school-blog.ru/api/posts/dislike/5e778ccd2c752801c3ea8888';
+
+	try {
+	  const response = await fetch(url, {
+		method: 'PUT'
+	  });
+	  const status = response.status; // может быть 200
+
+	  const json = await response.json();
+	  console.log('Успех:', JSON.stringify(json));
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример запроса axios</summary>
+
+```javascript
+	const url = 'https://school-blog.ru/api/posts/dislike/5e778ccd2c752801c3ea8888';
+
+	try {
+	  const response = await axios({
+		url,
+		method: 'PUT'
+	  });
+	  const status = response.status; // может быть 200
+	  const data = response.data; // тело ответа
+
+	  console.log('Успех:', data);
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример ответа</summary>
+
+```javascript
+	{
+		"viewsCount":0,
+		"likesCount":0,
+		"dislikesCount":0,
+		"rating":0,
+		"_id":"5e778ccd2c752801c3ea8888",
+		"title":"New titile",
+		"content":"New content",
+		"authorId":"5e7376a32c752801c3ea8877",
+		"id":"5e778ccd2c752801c3ea8888",
+		"date":"2020-03-22T16:05:33.017Z",
+		"postNumber":11,
+		"__v":0,
+		"author":{
+			"id":"5e7376a32c752801c3ea8877",
+			"role":"user",
+			"admin":false,
+			"login":"12",
+			"firstName":"12",
+			"lastName":"",
+			"patronymic":"",
+			"avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg",
+			"registrationDate":"2020-03-19T13:41:55.418Z",
+			"email":"12"
+			},
+		"relatedLikes":[],
+		"relatedDislikes":[]
+	}
+```
+</details>
 
 ### Получение списка избранных постов
-path: `/api/posts/favourite/`
+url: `/api/posts/favourite/`
 
 method: `GET`
 
 query-string (GET параметры запроса):
 ```
+	(поля помеченные знаком "?" являются НЕ обязательными)
 	authorId?: string
 	search?: string,
 	offset?: number,
 	offsetStep?: number
 ```
 
-response:
-`
-[
-	{
-		id,
-		title,
-		content,
-		authorId,
-		date,
-		views,
-		author,
-		likes,
-		dislikes,
-		viewsCount,
-		likesCount,
-		dislikesCount,
-		rating
+<details>
+<summary>Успешный ответ:</summary>\
+
+```javascript
+	status = 200
+	body = [
+		{
+			id: string,
+			title: string,
+			content: string,
+			authorId: string,
+			date: string,
+			author: Object,
+			relatedLikes: string[],
+			relatedDislikes: string[],
+			viewsCount: number,
+			likesCount: number,
+			dislikesCount: number,
+			rating: number
+		}
+   ]
+```
+</details>
+
+<details>
+<summary>Пример запроса fetch</summary>
+
+```javascript
+	const url = 'http://school-blog.ru/api/posts/favourite';
+	
+	try {
+	  const response = await fetch(url, {
+		method: 'GET'
+	  });
+	  const status = response.status; // может быть 200
+
+	  const json = await response.json();
+	  console.log('Успех:', JSON.stringify(json));
+	} catch (error) {
+	  console.error('Ошибка:', error);
 	}
-]
-`
+```
+</details>
+
+<details>
+<summary>Пример запроса axios</summary>
+
+```javascript
+	const url = 'https://school-blog.ru/api/posts/favourite';
+
+	try {
+	  const response = await axios({
+		url,
+		method: 'GET',
+		params: { // query-string параметри GET запроса
+			sort?: 'best',
+			offset: 0,
+			offsetStep: 30
+		}
+	  });
+	  const status = response.status; // может быть 200
+	  const data = response.data; // тело ответа
+
+	  console.log('Успех:', data);
+	} catch (error) {
+	  console.error('Ошибка:', error);
+	}
+```
+</details>
+
+<details>
+<summary>Пример ответа</summary>
+
+```javascript
+	[
+		{"viewsCount":8,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778ccd2c752801c3ea8888","title":"qwertyuiopoiuytrew","content":"rtyui\nvg\ncgvh\nvgh\nv\nhv\nh\nv","authorId":"5e7376a32c752801c3ea8877","id":"5e778ccd2c752801c3ea8889","date":"2020-03-22T16:05:33.017Z","postNumber":11,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
+		{"viewsCount":2,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778bf12c752801c3ea8886","title":"asecd","content":"aesdcvaefsdvc eaf","authorId":"5e7376a32c752801c3ea8877","id":"5e778bf12c752801c3ea8887","date":"2020-03-22T16:01:53.650Z","postNumber":10,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
+		{"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e778b8c2c752801c3ea8884","title":"12","authorId":"5e7376a32c752801c3ea8877","id":"5e778b8c2c752801c3ea8885","date":"2020-03-22T16:00:12.871Z","postNumber":9,"__v":0,"author":{"id":"5e7376a32c752801c3ea8877","role":"user","admin":false,"login":"12","firstName":"12","lastName":"","patronymic":"","avatar":"avatar-da5c6176b511cbfc5e34873583bf6d18.svg","registrationDate":"2020-03-19T13:41:55.418Z","email":"12"},"likes":[],"dislikes":[]},
+		{"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e71d2452c752801c3ea8870","title":"gfhn","content":"dgh","authorId":"5e62399ae95efa2005d521c9","id":"5e71d2452c752801c3ea8871","date":"2020-03-18T07:48:21.499Z","postNumber":8,"__v":0,"author":{"id":"5e62399ae95efa2005d521c9","role":"user","admin":false,"login":"1234","firstName":"123","lastName":"123","patronymic":"","avatar":"avatar-bcdd0fd116278a3bcc3e8b80e56106ee.svg","registrationDate":"2020-03-06T11:52:58.344Z","email":"1234"},"likes":[],"dislikes":[]},
+		{"viewsCount":1,"likesCount":0,"dislikesCount":0,"rating":0,"_id":"5e7115142c752801c3ea886e","title":"title","content":"qwertjhgfdsgh hjhgsfgdfh dgfhjmhf dthfjhgh","authorId":"5e62399ae95efa2005d521c9","id":"5e7115142c752801c3ea886f","date":"2020-03-17T18:21:08.316Z","postNumber":7,"__v":0,"author":{"id":"5e62399ae95efa2005d521c9","role":"user","admin":false,"login":"1234","firstName":"123","lastName":"123","patronymic":"","avatar":"avatar-bcdd0fd116278a3bcc3e8b80e56106ee.svg","registrationDate":"2020-03-06T11:52:58.344Z","email":"1234"},"likes":[],"dislikes":[]}
+	]
+```
+</details>
