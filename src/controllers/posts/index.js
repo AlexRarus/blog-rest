@@ -100,7 +100,7 @@ router.post('/api/posts/', async (req, res) => {
 
   const constraints = {
     title: { maxLength: 200 },
-    content: { maxLength: 1000 },
+    content: { maxLength: 10000 },
     authorId: { isRequired: true },
   };
 
