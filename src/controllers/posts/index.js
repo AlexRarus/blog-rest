@@ -60,7 +60,7 @@ router.get('/api/posts/favourite/', async (req, res) => {
     const likesOfPostsIds = likesOfPosts.map(like => mongoose.Types.ObjectId(like.entityId));
     const posts = likesOfPostsExists
       ? await Post.find({
-        _id: {
+        id: {
           $in: likesOfPostsIds
         }
       })
