@@ -3,6 +3,7 @@ import { Post, Like, Dislike } from 'src/db/models';
 import { updatePost, updatePosts, removePost } from './utils';
 import { removeEmptyFields } from '../utils.js';
 import { validate } from 'src/app/utils.js';
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -56,8 +57,13 @@ router.get('/api/posts/favourite/', async (req, res) => {
   try {
     const likesOfPosts = await Like.find({ entityType: 'post', authorId: user.id });
     const likesOfPostsExists = Boolean(likesOfPosts.length);
+    const likesOfPostsIds = likesOfPosts.map(like => mongoose.Types.ObjectId(like.entityId));
     const posts = likesOfPostsExists
-      ? await Post.find({ id: { $in: [likesOfPosts.map(like => like.entityId)] } })
+      ? await Post.find({
+        _id: {
+          $in: likesOfPostsIds
+        }
+      })
         .filterBySubstring(search)
         .sort({ date: -1 })
         .skip(parseInt(offset, 10))
