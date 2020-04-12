@@ -134,9 +134,8 @@ router.put('/api/posts/:id', async (req, res) => {
   try {
     const targetPost = await Post.findOne({ id }, { strict: false });
 
-    const admin = user.role === 'admin';
     // нельзя изменять чужие посты
-    if (user.id !== targetPost.authorId || !admin) {
+    if (user.id.toString() !== targetPost.authorId.toString()) {
       return res.status(403).json(null);
     }
   } catch (error) {
@@ -153,7 +152,7 @@ router.put('/api/posts/:id', async (req, res) => {
 
   const constraints = {
     title: { maxLength: 200 },
-    content: { maxLength: 1000 },
+    content: { maxLength: 10000 },
   };
 
   try {
