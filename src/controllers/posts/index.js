@@ -174,11 +174,15 @@ router.put('/api/posts/:id', async (req, res) => {
 });
 
 router.delete('/api/posts/:id', async (req, res) => {
-  const { params: { id } } = req;
+  const { user, params: { id } } = req;
 
   // находим пост по id
   try {
     const post = await Post.findOne({ id });
+
+    if (post.authorId !== user.id) {
+      return res.status(403).json(null);
+    }
 
     await removePost(post);
     res.send({ id, removed: 'success' });

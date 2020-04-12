@@ -9,7 +9,7 @@ app.get('/api/posts/favourite/', controllers.posts);
 
 app.get('/api/posts/:id', controllers.posts);
 app.post('/api/posts/', allowAccess(['user']), controllers.posts);
-app.delete('/api/posts/:id', allowAccess(['admin']), controllers.posts);
+app.delete('/api/posts/:id', allowAccess(['user']), controllers.posts);
 app.put('/api/posts/:id', allowAccess(['user']), controllers.posts);
 
 app.put('/api/posts/like/:id', allowAccess(['user']), controllers.posts);
