@@ -180,7 +180,7 @@ router.delete('/api/posts/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ id });
 
-    if (post.authorId !== user.id) {
+    if (post.authorId.toString() !== user.id.toString()) {
       return res.status(403).json(null);
     }
 
