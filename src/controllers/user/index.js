@@ -26,7 +26,7 @@ router.post('/api/users/signup/', async (req, res) => {
 
   const constraints = {
     login: { unique: User, isRequired: true, maxLength: 100 },
-    email: { isRequired: true, maxLength: 100 },
+    email: { unique: User, isRequired: true, maxLength: 100 },
     firstName: { isRequired: true, maxLength: 100 },
     lastName: { maxLength: 100 },
     password: { isRequired: true, minLength: 3, maxLength: 100 }
